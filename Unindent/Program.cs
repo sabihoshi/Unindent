@@ -7,16 +7,14 @@ namespace Unindent
     {
         private static void Main(string[] args)
         {
-            foreach (var line in args)
+            foreach (var line in Unindent(args))
             {
-                Unindent(line);
+                Console.WriteLine(line);
             }
         }
 
-        private static string Unindent(string input)
+        private static string[] Unindent(string[] lines)
         {
-            var lines = input.Split(Environment.NewLine);
-
             // Usually the first or second line is the one with indentation.
             // If it's any further, ignore it.
             var indent = 0;
@@ -49,8 +47,7 @@ namespace Unindent
                 }
                 lines[i] = lines[i].Substring(offset);
             }
-            Console.WriteLine($"Space: {indent}");
-            return string.Join(Environment.NewLine, lines);
+            return lines;
         }
 
         private static int GetWhitespaceLength(char c) =>
